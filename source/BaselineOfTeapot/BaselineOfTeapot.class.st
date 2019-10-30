@@ -32,6 +32,6 @@ BaselineOfTeapot >> setUpDependencies: spec [
 	spec
 		baseline: 'NeoJSON'
 		with: [ spec
-				repository: 'github://svenvc/NeoJSON:master/repository';
+				repository: 'github://svenvc/NeoJSON:v17/repository';
 				loads: #('core') ]
 ]
