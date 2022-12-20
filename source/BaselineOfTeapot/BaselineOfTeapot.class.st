@@ -10,7 +10,7 @@ BaselineOfTeapot >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ 
+		do: [
 			self setUpDependencies: spec.
 			
 			spec

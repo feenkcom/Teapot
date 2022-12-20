@@ -3,7 +3,7 @@ Two inputs and a remove button.
 "
 Class {
 	#name : #TeaKeyValueInput,
-	#superclass : #ComposableModel,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'keyInput',
 		'valueInput',
@@ -13,19 +13,13 @@ Class {
 }
 
 { #category : #specs }
-TeaKeyValueInput class >> defaultSpec [
-	^ SpecLayout composed
-		newRow: [ :row |
-			row
-				add: #keyInput;
-				add: #valueInput;
-				add: #removeButton ]
-		 height: self height
-]
-
-{ #category : #accessing }
-TeaKeyValueInput class >> height [
-	^ self inputTextHeight max: self buttonHeight
+TeaKeyValueInput class >> defaultLayout [
+	^ SpBoxLayout newHorizontal  
+		add: #keyInput expand: true fill: true padding: 5;
+		add: #valueInput expand: true fill: true padding: 5;
+		add: #removeButton expand: false fill: false padding: 5;
+		vAlignStart;
+		yourself
 ]
 
 { #category : #'instance creation' }
@@ -42,9 +36,9 @@ TeaKeyValueInput >> asAssociation [
 ]
 
 { #category : #initialization }
-TeaKeyValueInput >> initializeWidgets [	
-	keyInput := self newTextInput autoAccept: true; ghostText: 'key'; yourself.
-	valueInput := self newTextInput autoAccept: true; ghostText: 'value'; yourself.
+TeaKeyValueInput >> initializePresenters [
+	keyInput := self newTextInput placeholder: 'key'; yourself.
+	valueInput := self newTextInput placeholder: 'value'; yourself.
 	removeButton := self newButton label: 'Remove'; yourself.
 	self focusOrder
 		add: keyInput;

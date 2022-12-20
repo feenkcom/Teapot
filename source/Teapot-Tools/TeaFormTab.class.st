@@ -3,7 +3,7 @@ I'm built up from a dynamically extensible key value pair list (TeaKeyValueInput
 "
 Class {
 	#name : #TeaFormTab,
-	#superclass : #ComposableModel,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'form',
 		'addButton'
@@ -12,17 +12,24 @@ Class {
 }
 
 { #category : #specs }
-TeaFormTab class >> defaultSpec [
-	^ SpecLayout composed
-		newColumn: [ :col |
-			col 
-				add: #form;
-				add: #addButton height: self buttonHeight ]
+TeaFormTab class >> defaultLayout [
+	^ SpBoxLayout newVertical 
+		add: #form expand: false fill: false;
+      add: (SpBoxLayout newHorizontal 
+		   add: #addButton expand: false fill: false;
+         hAlignCenter;
+         yourself) expand: false fill: false;		
+		yourself
 ]
 
 { #category : #accessing }
 TeaFormTab >> addButton [
 	^ addButton 
+]
+
+{ #category : #initialization }
+TeaFormTab >> connectPresenters [ 
+	addButton whenActionPerformedDo: [ form addKey: 'key' value: 'value' ]
 ]
 
 { #category : #accessing }
@@ -31,12 +38,7 @@ TeaFormTab >> form [
 ]
 
 { #category : #initialization }
-TeaFormTab >> initializePresenter [
-	addButton whenActionPerformedDo: [ form addKey: '' value: '' ]
-]
-
-{ #category : #initialization }
-TeaFormTab >> initializeWidgets [
+TeaFormTab >> initializePresenters [
 	addButton := self newButton label: 'Add parameter'; yourself.
 	form := self instantiate: TeaKeyValueList.
 	self focusOrder 
