@@ -12,7 +12,7 @@ BaselineOfTeapotForGToolkit >> baseline: spec [
 		do: [ spec
 				baseline: 'NeoJSON'
 				with: [ spec
-						repository: 'github://svenvc/NeoJSON:v17/repository';
+						repository: 'github://svenvc/NeoJSON:master/repository';
 						loads: #('core') ].
 
 			spec
